@@ -24,6 +24,10 @@ public interface GithubRepositoryRetrofitService {
     public Call<GitUserExecutedPullRequests> getUserExecutedPullRequests(
             @Query("q") String query);
 
+    @GET("/search/issues")
+    public Call<GitUserReviewedPullRequests> getUserReviewedPullRequests(
+            @Query("q") String query);
+
     @GET("/repos/{username}/{repo}/commits")
     public Call<List<GitUserCommit>> getUserCommits(
             @Header("Authorization") String accessToken,

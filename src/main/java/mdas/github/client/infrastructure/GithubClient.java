@@ -81,6 +81,20 @@ public class GithubClient implements GitUserRepositoryService, GithubRepositoryP
         return response.body();
     }
 
+    public GitUserReviewedPullRequests getUserReviewedPullRequests(String username, String month) throws IOException {
+        String query = "type\\:pr+reviewed-by\\:" + username + "+created\\:" + month;
+        Call<GitUserReviewedPullRequests> retrofitCall = service.getUserReviewedPullRequests(query);
+
+        Response<GitUserReviewedPullRequests> response = retrofitCall.execute();
+
+        if (!response.isSuccessful())    {
+            throw new IOException(response.errorBody() != null
+                    ? response.errorBody().string() : "Unknown error");
+        }
+
+        return response.body();
+    }
+
     public List<GitUserCommit> getUserCommits (String username, String repo, String month, String year) throws IOException {
         var monthDates = new MonthConstraintsCalculator().execute(month, year);
         Call<List<GitUserCommit>> retrofitCall = service.getUserCommits(accessToken, API_VERSION_SPEC, username,
