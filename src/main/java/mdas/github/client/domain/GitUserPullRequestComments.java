@@ -15,6 +15,14 @@ public class GitUserPullRequestComments {
         return total_count;
     }
 
+    public int getCommentAvgLenght(){
+        int totalLength = 0;
+        for (GitUserComment comment: this.getItems()) {
+            totalLength+=comment.getCommentLength();
+        }
+        return totalLength/this.getTotal_count();
+    }
+
     public List<GitUserComment> getItems() {
         return items;
     }
