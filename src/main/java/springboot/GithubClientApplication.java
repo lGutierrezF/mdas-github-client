@@ -18,8 +18,10 @@ public class GithubClientApplication {
 		//var user = githubClient.getUser("lGutierrezF");
 		//var repos =  githubClient.getUserRepos("octocat");
 		//var comments =  githubClient.getUserPullRequestComments("octocat","2016-09-27");
+		var pr =  githubClient.getUserReviewedPullRequests("octocat","2016-09-27");
+		//System.out.println(comments.getCommentAvgLenght());
 		//var comments =  githubClient.getUserExecutedPullRequests("octocat","2016-09");
-		var commits =  githubClient.getUserCommits("octocat","octocat.github.io","11","2015");
+		//var commits =  githubClient.getUserCommits("octocat","octocat.github.io","11","2015");
 	}
 
 }
