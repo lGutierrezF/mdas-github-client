@@ -1,10 +1,10 @@
 package mdas.github.client.domain;
 
-public class GitUserRepo {
+public class GitOrgRepo {
     private int id;
     private String name;
 
-    public GitUserRepo(int id, String name) {
+    public GitOrgRepo(int id, String name) {
         this.id = id;
         this.name = name;
     }

@@ -13,9 +13,17 @@ public interface GithubRepositoryRetrofitService {
     @GET("/users/{username}")
     Call<GitUserMonthlyData> getUser(@Header("Authorization") String accessToken,
                                      @Header("Accept") String apiVersionSpec, @Path("username") String username);
-    @GET("/users/{username}/repos")
-    Call<List<GitUserRepo>> getUserRepos(@Header("Authorization") String accessToken,
-                                         @Header("Accept") String apiVersionSpec, @Path("username") String username);
+    @GET("/orgs/{username}/teams")
+    Call<GitUserMonthlyData> getOrgTeams(@Header("Authorization") String accessToken,
+                                     @Header("Accept") String apiVersionSpec, @Path("username") String username);
+    @GET("/orgs/{username}/teams/{teamName}/members")
+    Call<GitUserMonthlyData> getTeamMembers(@Header("Authorization") String accessToken,
+                                         @Header("Accept") String apiVersionSpec,
+                                         @Path("username") String username,
+                                         @Path("teamName") String teamName);
+    @GET("/orgs/{org}/repos")
+    Call<List<GitOrgRepo>> getOrgRepos(@Header("Authorization") String accessToken,
+                                       @Header("Accept") String apiVersionSpec, @Path("org") String org);
     @GET("/search/issues")
     public Call<GitUserPullRequestComments> getUserPullRequestComments(
             @Query("q") String query);
@@ -28,17 +36,25 @@ public interface GithubRepositoryRetrofitService {
     public Call<GitUserReviewedPullRequests> getUserReviewedPullRequests(
             @Query("q") String query);
 
-    @GET("/repos/{username}/{repo}/commits")
+    @GET("/repos/{org}/{repo}/commits")
     public Call<List<GitUserCommit>> getUserCommits(
             @Header("Authorization") String accessToken,
             @Header("Accept") String apiVersionSpec,
-            @Path("username") String username,
+            @Path("org") String org,
             @Path("repo") String repo,
             @Query("since") String startMonth,
             @Query("until") String endMonth);
 
     @GET("/repos/{username}/{repo}/commits/{sha}")
     public Call<GitUserCommit> getUserCommitStats(
+            @Header("Authorization") String accessToken,
+            @Header("Accept") String apiVersionSpec,
+            @Path("username") String username,
+            @Path("repo") String repo,
+            @Path("sha") String sha);
+
+    @GET("/repos/{username}/{repo}/commits/{sha}")
+    public Call<GitUser> getCommiter(
             @Header("Authorization") String accessToken,
             @Header("Accept") String apiVersionSpec,
             @Path("username") String username,
