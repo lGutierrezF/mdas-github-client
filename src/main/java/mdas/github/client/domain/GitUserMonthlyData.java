@@ -1,23 +1,41 @@
 package mdas.github.client.domain;
 
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class GitUserMonthlyData {
     private String login;
     private String date;
-    private GitUserReviewedPullRequests reviewedPullRequests;
-    private GitUserExecutedPullRequests executedPullRequests;
-    private GitUserPullRequestComments pullRequestComments;
-    private GitCommitStats gitCommitStats;
+    private int reviewedPullRequests;
+    private int executedPullRequests;
+    private float pullRequestCommentsAvg;
+    private int totalLines;
+    private int linesAdded;
+    private int linesDeleted;
 
-    public GitUserMonthlyData(String login, String date, GitUserReviewedPullRequests reviewedPullRequests,
-                              GitUserExecutedPullRequests executedPullRequests,
-                              GitUserPullRequestComments pullRequestComments, GitCommitStats gitCommitStats) {
+    public GitUserMonthlyData(String login, String date, int reviewedPullRequests, int executedPullRequests, float pullRequestCommentsAvg, int totalLines, int linesAdded, int linesDeleted) {
         this.login = login;
         this.date = date;
         this.reviewedPullRequests = reviewedPullRequests;
         this.executedPullRequests = executedPullRequests;
-        this.pullRequestComments = pullRequestComments;
-        this.gitCommitStats = gitCommitStats;
+        this.pullRequestCommentsAvg = pullRequestCommentsAvg;
+        this.totalLines = totalLines;
+        this.linesAdded = linesAdded;
+        this.linesDeleted = linesDeleted;
     }
+
+    /*public GitUserMonthlyData(String login, String date, GitUserReviewedPullRequests reviewedPullRequests,
+                              GitUserExecutedPullRequests executedPullRequests,
+                              GitUserPullRequestComments pullRequestCommentsAvg, List<GitUserCommit> gitCommit) {
+        this.login = login;
+        this.date = date;
+        this.reviewedPullRequests = reviewedPullRequests.getTotal_count();
+        this.executedPullRequests = executedPullRequests.getTotal_count();
+        this.pullRequestCommentsAvg = pullRequestCommentsAvg.getCommentAvgLenght();
+        this.getTotalCommitStats(gitCommit);
+    }*/
 
     public String getLogin() {
         return login;
@@ -27,20 +45,28 @@ public class GitUserMonthlyData {
         return date;
     }
 
-    public GitUserReviewedPullRequests getReviewedPullRequests() {
+    public int getReviewedPullRequests() {
         return reviewedPullRequests;
     }
 
-    public GitUserExecutedPullRequests getExecutedPullRequests() {
+    public int getExecutedPullRequests() {
         return executedPullRequests;
     }
 
-    public GitUserPullRequestComments getPullRequestComments() {
-        return pullRequestComments;
+    public float getPullRequestCommentsAvg() {
+        return pullRequestCommentsAvg;
     }
 
-    public GitCommitStats getGitCommitStats() {
-        return gitCommitStats;
+    public int getTotalLines() {
+        return totalLines;
+    }
+
+    public int getLinesAdded() {
+        return linesAdded;
+    }
+
+    public int getLinesDeleted() {
+        return linesDeleted;
     }
 
 }
