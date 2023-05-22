@@ -40,10 +40,10 @@ public class GithubClient implements GitUserRepositoryService, GithubRepositoryP
         return response.body();
     }
 
-    public List<GitUserRepo> getUserRepos(String username) throws IOException {
-        Call<List<GitUserRepo>> retrofitCall = service.getUserRepos(accessToken, API_VERSION_SPEC,username);
+    public List<GitOrgRepo> getUserRepos(String username) throws IOException {
+        Call<List<GitOrgRepo>> retrofitCall = service.getOrgRepos(accessToken, API_VERSION_SPEC,username);
 
-        Response<List<GitUserRepo>> response = retrofitCall.execute();
+        Response<List<GitOrgRepo>> response = retrofitCall.execute();
 
         if (!response.isSuccessful()) {
             throw new IOException(response.errorBody() != null
@@ -52,7 +52,6 @@ public class GithubClient implements GitUserRepositoryService, GithubRepositoryP
 
         return response.body();
     }
-
     public GitUserPullRequestComments getUserPullRequestComments(String username, String month) throws IOException {
         String query = "type\\:pr+commenter\\:" + username + "+created\\:" + month;
         Call<GitUserPullRequestComments> retrofitCall = service.getUserPullRequestComments(query);
@@ -113,7 +112,6 @@ public class GithubClient implements GitUserRepositoryService, GithubRepositoryP
         }
         return commits;
     }
-
     public GitCommitStats getCommitStatistics (String username, String repo, String sha) throws IOException {
         Call<GitUserCommit> retrofitCall = service.getUserCommitStats(accessToken, API_VERSION_SPEC,username,repo, sha);
         Response<GitUserCommit> response = retrofitCall.execute();
