@@ -1,10 +1,6 @@
 package mdas.github.client.domain;
 
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class GitUserMonthlyData {
     private String login;
     private String date;
